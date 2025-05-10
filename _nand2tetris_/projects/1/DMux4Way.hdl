@@ -14,11 +14,11 @@ CHIP DMux4Way {
     OUT a, b, c, d;
 
     PARTS:
-        // First level DMux (splits into two)
-    DMux(in=in, sel=sel[1], out1=a, out2=b);
+       // First level DMux: split in into two
+    DMux(in=in, sel=sel[1], a=w1, b=w2);
 
-    // Second level DMuxs (split a and b each into two)
-    DMux(in=a, sel=sel[0], out1=out[0], out2=out[1]);
-    DMux(in=b, sel=sel[0], out1=out[2], out2=out[3]);
+    // Second level DMux: split each half into two again
+    DMux(in=w1, sel=sel[0], a=a, b=b);
+    DMux(in=w2, sel=sel[0], a=c, b=d);
 
 }
